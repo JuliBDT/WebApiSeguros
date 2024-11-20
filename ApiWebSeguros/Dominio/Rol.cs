@@ -7,7 +7,7 @@ namespace ApiWebSeguros.Dominio
 {
     public class Rol
     {
-                public int ramo { get; set; }
+        public int ramo { get; set; }
         public int producto { get; set; }
         public int poliza { get; set; }
         public int rol { get; set; }
