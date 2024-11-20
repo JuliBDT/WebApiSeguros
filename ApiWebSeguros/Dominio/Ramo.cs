@@ -7,7 +7,7 @@ namespace ApiWebSeguros.Dominio
 {
     public class Ramo
     {
-                public int ramo { get; set; }
+        public int ramo { get; set; }
         public DateTime fechaComputo { get; set; }
         public string descripcion { get; set; }
         public int estadoRegistro { get; set; }
