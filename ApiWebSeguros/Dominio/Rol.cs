@@ -11,7 +11,7 @@ namespace ApiWebSeguros.Dominio
         public int producto { get; set; }
         public int poliza { get; set; }
         public int rol { get; set; }
-        public string cliente { get; set; }
+        public string cliente { get; set; } ="";
         public DateTime fechaEfecto { get; set; }
         public DateTime? nulldate { get; set; }
     }

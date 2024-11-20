@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\Desktop\\ProyectoWebApiSeguros\\WebApiSeguros\\ApiWebSeguros\\ApiWebSeguros.csproj": {}
+    "C:\\Users\\Usuario\\Desktop\\ApiSeguros\\ApiWebSeguros\\ApiWebSeguros.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\Desktop\\ProyectoWebApiSeguros\\WebApiSeguros\\ApiWebSeguros\\ApiWebSeguros.csproj": {
+    "C:\\Users\\Usuario\\Desktop\\ApiSeguros\\ApiWebSeguros\\ApiWebSeguros.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\Desktop\\ProyectoWebApiSeguros\\WebApiSeguros\\ApiWebSeguros\\ApiWebSeguros.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\Desktop\\ApiSeguros\\ApiWebSeguros\\ApiWebSeguros.csproj",
         "projectName": "ApiWebSeguros",
-        "projectPath": "C:\\Users\\Usuario\\Desktop\\ProyectoWebApiSeguros\\WebApiSeguros\\ApiWebSeguros\\ApiWebSeguros.csproj",
+        "projectPath": "C:\\Users\\Usuario\\Desktop\\ApiSeguros\\ApiWebSeguros\\ApiWebSeguros.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\Desktop\\ProyectoWebApiSeguros\\WebApiSeguros\\ApiWebSeguros\\obj\\",
+        "outputPath": "C:\\Users\\Usuario\\Desktop\\ApiSeguros\\ApiWebSeguros\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -114,7 +114,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -9,14 +9,14 @@ namespace ApiWebSeguros.Dominio.Entidades.DTOs
     {
         public int rol { get; set; }
         public DateTime fechaComputo { get; set; }
-        public string descripcion { get; set; }
+        public string descripcion { get; set; } ="";
         public int estado { get; set; }
         public int codUsuario { get; set; }
     }
 
     public class TipoRolesToCreateDto
     {
-        public string descripcion { get; set; }
+        public string descripcion { get; set; } ="";
         public int estado { get; set; }
         public int codUsuario { get; set; }
     }
@@ -24,7 +24,7 @@ namespace ApiWebSeguros.Dominio.Entidades.DTOs
     public class TipoRolesToUpdateDto
     {
         public int rol { get; set; }
-        public string descripcion { get; set; }
+        public string descripcion { get; set; } ="";
         public int estado { get; set; }
         public int codUsuario { get; set; }
     }
