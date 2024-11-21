@@ -5,15 +5,15 @@ namespace ApiWebSeguros.Dominio
     public class Poliza
     {
         [Key]
-        public int ramo { get; set; }
-        public int producto { get; set; }
-        public int poliza { get; set; }
-        public string clienteTitular { get; set; } ="";
-        public DateTime? nulldate { get; set; }
-        public DateTime fechaEfecto { get; set; }
-        public DateTime fechaVigencia { get; set; }
-        public string domicilio { get; set; } ="";
-        public int sumaAsegurada { get; set; }
-        public int waypay { get; set; }
+        public int RAMO { get; set; }
+        public int PRODUCTO{ get; set; }
+        public int POLIZA { get; set; }
+        public string CLIENTE_TITULAR{ get; set; } ="";
+        public DateTime? NULLDATE { get; set; }
+        public DateTime FECHA_EFECTO{ get; set; }
+        public DateTime FECHA_VIGENCIA{ get; set; }
+        public string DOMICILIO { get; set; } ="";
+        public int SUMA_ASEGURADA { get; set; }
+        public int WAYPAY { get; set; }
     }
 }

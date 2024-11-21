@@ -7,12 +7,11 @@ namespace ApiWebSeguros.Dominio
     public class Cliente
     {
         [Key]
-        public string cliente { get; set; } ="";
-        public string nombre { get; set; } ="";
-        public DateTime fechaNacimiento { get; set; }
-        public DateTime? nulldate { get; set; }
-        public DateTime fechaModificacion { get; set; }
-        public int estadoCivil { get; set; }
+        public string CLIENTE { get; set; } ="";
+        public string NOM_COMPLETO { get; set; } ="";
+        public DateTime FECHA_NACIMIENTO { get; set; }
+        public DateTime? NULLDATE { get; set; }
+        public int ESTADO_CIVIL { get; set; }
 
     }
 }
