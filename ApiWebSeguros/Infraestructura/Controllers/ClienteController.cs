@@ -2,6 +2,7 @@ using ApiWebSeguros.Dominio.Entidades.DTOs;
 using ApiWebSeguros.Dominio;
 using ApiWebSeguros.Persistencia.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using ApiWebSeguros.Data;
 
 namespace ApiWebSeguros.Infraestructura.Controllers
 {
@@ -9,11 +10,11 @@ namespace ApiWebSeguros.Infraestructura.Controllers
     [Route("api/[controller]")]
     public class ClienteController : ControllerBase
     {
-        private readonly IClienteRepository _clienteRepository;
+        private readonly DataContext _context;
 
-        public ClienteController(IClienteRepository clienteRepository)
+        public ClienteController(DataContext clienteRepository)
         {
-            _clienteRepository = clienteRepository;
+            _context = clienteRepository;
             
         }
 

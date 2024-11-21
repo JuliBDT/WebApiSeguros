@@ -2,6 +2,7 @@ using ApiWebSeguros.Dominio.Entidades.DTOs; // Asegúrate de crear los DTOs para
 using ApiWebSeguros.Dominio;
 using ApiWebSeguros.Persistencia.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using ApiWebSeguros.Data;
 
 namespace ApiWebSeguros.Infraestructura.Controllers
 {
@@ -9,11 +10,13 @@ namespace ApiWebSeguros.Infraestructura.Controllers
     [Route("api/[controller]")]
     public class RamoController : ControllerBase
     {
-        private readonly IRamoRepository _ramoRepository;
+        private readonly DataContext _context;
 
-        public RamoController(IRamoRepository ramoRepository)
+        public RamoController(DataContext ramoRepository)
         {
-            _ramoRepository = ramoRepository;
+            _context = ramoRepository;
         }
+
+
     }
 }

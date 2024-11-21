@@ -2,6 +2,8 @@ using ApiWebSeguros.Dominio.Entidades.DTOs;
 using ApiWebSeguros.Dominio;
 using ApiWebSeguros.Persistencia.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using ApiWebSeguros.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiWebSeguros.Infraestructura.Controllers
 {
@@ -9,13 +11,21 @@ namespace ApiWebSeguros.Infraestructura.Controllers
     [Route("api/[controller]")]
     public class PolizaController : ControllerBase
     {
-        private readonly IPolizaRepository _polizaRepository; // Crea la interfaz del repositorio para Poliza.
+        private readonly DataContext _context; 
 
-        public PolizaController(IPolizaRepository polizaRepository )
+        public PolizaController(DataContext polizaRepository )
         {
-            _polizaRepository = polizaRepository;
+            _context = polizaRepository;
           
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetPolizas()
+        {
+            var polizas = await _context.Polizas.ToListAsync();
+            return Ok(polizas);
+        }
+
 
     }
 }

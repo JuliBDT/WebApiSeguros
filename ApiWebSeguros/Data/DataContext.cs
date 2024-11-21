@@ -15,13 +15,10 @@ namespace ApiWebSeguros.Data
         }
 
         public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<EstadoCivil> EstadosCiviles { get; set; }
         public DbSet<Poliza> Polizas { get; set; }
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Ramo> Ramos { get; set; }
-        public DbSet<Rol> Roles { get; set; }
-        public DbSet<TipoRoles> TiposRoles { get; set; }
-        public DbSet<WayPay> WayPays { get; set; }
+
 
 
 
@@ -33,9 +30,6 @@ namespace ApiWebSeguros.Data
             modelBuilder.Entity<Poliza>().ToTable("POLIZA");
             modelBuilder.Entity<Producto>().ToTable("PRODUCTMASTER");
             modelBuilder.Entity<Ramo>().ToTable("BRANCHMASTER");
-            modelBuilder.Entity<Rol>().ToTable("ROLES");
-            modelBuilder.Entity<TipoRoles>().ToTable("ROLEMASTER");
-            modelBuilder.Entity<WayPay>().ToTable("WAYPAYSMASTER");
 
             base.OnModelCreating(modelBuilder);
         }
