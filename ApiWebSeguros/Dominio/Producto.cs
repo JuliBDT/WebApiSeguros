@@ -1,18 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiWebSeguros.Dominio
 {
     public class Producto
     {
-        public int ramo { get; set; }
-        public int producto { get; set; }
-        public DateTime fechaComputo { get; set; }
-        public string descripcion { get; set; } ="";
-        public int estadoRegistro { get; set; }
-        public int codUsuario { get; set; }
+
+        public int RAMO { get; set; }
+        [Key]
+        public int PRODUCTO { get; set; }
+        public DateTime FECHACOMPUTO{ get; set; }
+        public string DESCRIPCION { get; set; } ="";
+        public int ESTADOREGISTRO { get; set; }
+        public int CODUSUARIO { get; set; }
     }
 
     

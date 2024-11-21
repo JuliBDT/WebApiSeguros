@@ -1,4 +1,3 @@
-using AutoMapper;
 using ApiWebSeguros.Dominio.Entidades.DTOs; // Asegúrate de crear los DTOs para Poliza.
 using ApiWebSeguros.Dominio;
 using ApiWebSeguros.Persistencia.Interfaces;
@@ -11,20 +10,18 @@ namespace ApiWebSeguros.Infraestructura.Controllers
     public class RamoController : ControllerBase
     {
         private readonly IRamoRepository _ramoRepository;
-        private readonly IMapper _mapper;
 
-        public RamoController(IRamoRepository ramoRepository, IMapper mapper)
+        public RamoController(IRamoRepository ramoRepository)
         {
             _ramoRepository = ramoRepository;
-            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var ramos = await _ramoRepository.GetAllAsync();
-            var ramosDto = _mapper.Map<List<RamoToListDto>>(ramos);
-            return Ok(ramosDto);
+           // var ramosDto = _mapper.Map<List<RamoToListDto>>(ramos);
+            return Ok(ramos);
         }
 
         [HttpGet("{ramo}")]
@@ -33,39 +30,39 @@ namespace ApiWebSeguros.Infraestructura.Controllers
             var ramoEntity = await _ramoRepository.GetByIdAsync(ramo);
             if (ramoEntity == null) return NotFound("Ramo no encontrado.");
             
-            var ramoDto = _mapper.Map<RamoToListDto>(ramoEntity);
-            return Ok(ramoDto);
+           // var ramoDto = _mapper.Map<RamoToListDto>(ramoEntity);
+            return Ok(ramoEntity);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(RamoToCreateDto ramoToCreateDto)
+        public async Task<IActionResult> Post(Ramo ramoToCreat)
         {
-            var ramoToCreate = _mapper.Map<Ramo>(ramoToCreateDto);
-            ramoToCreate.fechaComputo = DateTime.Now;
+            //var ramoToCreate = _mapper.Map<Ramo>(ramoToCreateDto);
+            ramoToCreat.fechaComputo = DateTime.Now;
 
-            var ramoCreated = await _ramoRepository.AddAsync(ramoToCreate);
-            var ramoCreatedDto = _mapper.Map<RamoToListDto>(ramoCreated);
+            var ramoCreated = await _ramoRepository.AddAsync(ramoToCreat);
+            //var ramoCreatedDto = _mapper.Map<RamoToListDto>(ramoCreated);
 
-            return Ok(ramoCreatedDto);
+            return Ok(ramoCreated);
         }
 
         [HttpPut("{ramoId}")]
-        public async Task<IActionResult> Put(int ramoId, RamoToUpdateDto ramoToUpdateDto)
+        public async Task<IActionResult> Put(int ramoId, Ramo ramoToUpdate)
         {
-            if (ramoId != ramoToUpdateDto.ramo)
+            if (ramoId != ramoToUpdate.ramo)
                 return BadRequest("Error en los datos de entrada.");
 
-            var ramoToUpdate = await _ramoRepository.GetByIdAsync(ramoId);
-            if (ramoToUpdate == null) return NotFound("Ramo no encontrado.");
+            var ramo = await _ramoRepository.GetByIdAsync(ramoId);
+            if (ramo == null) return NotFound("Ramo no encontrado.");
 
-            _mapper.Map(ramoToUpdateDto, ramoToUpdate);
+            //_mapper.Map(ramoToUpdateDto, ramoToUpdate);
             var updated = await _ramoRepository.UpdateAsync(ramoId, ramoToUpdate);
 
             if (!updated) return NoContent();
 
             var ramoUpdated = await _ramoRepository.GetByIdAsync(ramoId);
-            var ramoDto = _mapper.Map<RamoToListDto>(ramoUpdated);
-            return Ok(ramoDto);
+            //var ramoDto = _mapper.Map<RamoToListDto>(ramoUpdated);
+            return Ok(ramoToUpdate);
         }
 
         [HttpDelete("{ramoId}")]

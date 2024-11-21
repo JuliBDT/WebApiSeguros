@@ -1,13 +1,8 @@
 using ApiWebSeguros.Data;
 using ApiWebSeguros.Dominio;
 using ApiWebSeguros.Dominio.Entidades.DTOs;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ApiWebSeguros.Infraestructura
 {
@@ -16,82 +11,82 @@ namespace ApiWebSeguros.Infraestructura
     public class ProductoController : ControllerBase
     {
         private readonly DataContext _context;
-        private readonly IMapper _mapper;
-        public ProductoController(DataContext context, IMapper mapper)
+        //private readonly IMapper _mapper;
+        public ProductoController(DataContext context )
         {
             _context = context;
-            _mapper = mapper;
+       
         }
 
-        [HttpPost]
-        public async Task<ActionResult> PostProducto(ProductoCreateDTO productoPost)
-        {
-            var nuevoProducto = _mapper.Map<Producto>(productoPost);
-            nuevoProducto.fechaComputo = DateTime.Now;
+        // [HttpPost]
+        // public async Task<ActionResult> PostProducto(ProductoCreateDTO productoPost)
+        // {
+        //     var nuevoProducto = _mapper.Map<Producto>(productoPost);
+        //     nuevoProducto.fechaComputo = DateTime.Now;
 
-            _context.Productos.Add(nuevoProducto);
-            await _context.SaveChangesAsync();
+        //     _context.Productos.Add(nuevoProducto);
+        //     await _context.SaveChangesAsync();
 
-            return Ok();
-        }
+        //     return Ok();
+        // }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductoDto>>> GetProductos()
+        public async Task<ActionResult<IEnumerable<Producto>>> GetProductos()
         {
             var productos = await _context.Productos.ToListAsync();
-            var ProductoDtos = _mapper.Map<List<ProductoDto>>(productos);
-            return Ok(ProductoDtos);
+           // var ProductoDtos = _mapper.Map<List<ProductoDto>>(productos);
+            return Ok(productos);
         }
 
         [HttpGet("{idRamo}/{idProducto}")]
-        public async Task<ActionResult<ProductoDto>> GetProducto(int idRamo, int idProducto)
+        public async Task<ActionResult<Producto>> GetProducto(int idRamo, int idProducto)
         {
             var producto = await _context.Productos
-                .FirstOrDefaultAsync(p => p.ramo == idRamo && p.producto == idProducto);
+                .FirstOrDefaultAsync(p => p.RAMO == idRamo && p.PRODUCTO == idProducto);
 
             if (producto == null)
             {
                 return NotFound();
             }
-            var ProductoDto = _mapper.Map<ProductoDto>(producto);
-            return Ok(ProductoDto);
+            //var ProductoDto = _mapper.Map<ProductoDto>(producto);
+            return Ok(producto);
         }
 
-        [HttpPut("{idRamo}/{idProducto}")]
-        public async Task<ActionResult> PutProducto(int idRamo, int idProducto, ProductoUpdateDTO producto)
-        {
-            var productoAModificar = await _context.Productos
-                .FirstOrDefaultAsync(p => p.ramo == idRamo && p.producto == idProducto);
+        // [HttpPut("{idRamo}/{idProducto}")]
+        // public async Task<ActionResult> PutProducto(int idRamo, int idProducto, ProductoUpdateDTO producto)
+        // {
+        //     var productoAModificar = await _context.Productos
+        //         .FirstOrDefaultAsync(p => p.ramo == idRamo && p.producto == idProducto);
 
-            if (productoAModificar == null)
-            {
-                return NotFound();
-            }
+        //     if (productoAModificar == null)
+        //     {
+        //         return NotFound();
+        //     }
 
-            _mapper.Map(producto, productoAModificar);
-            await _context.SaveChangesAsync();
+        //     _mapper.Map(producto, productoAModificar);
+        //     await _context.SaveChangesAsync();
 
-            return Ok();
-        }
+        //     return Ok();
+        // }
 
         
-        [HttpDelete("{idRamo}/{idProducto}")]
-        public async Task<ActionResult> DeleteProducto(int idRamo, int idProducto)
-        {
-            var producto = await _context.Productos
-                .FirstOrDefaultAsync(p => p.ramo == idRamo && p.producto == idProducto);
+        // [HttpDelete("{idRamo}/{idProducto}")]
+        // public async Task<ActionResult> DeleteProducto(int idRamo, int idProducto)
+        // {
+        //     var producto = await _context.Productos
+        //         .FirstOrDefaultAsync(p => p.ramo == idRamo && p.producto == idProducto);
 
-            if (producto == null)
-            {
-                return NotFound();
-            }
+        //     if (producto == null)
+        //     {
+        //         return NotFound();
+        //     }
 
-            _context.Productos.Remove(producto);
-            await _context.SaveChangesAsync();
+        //     _context.Productos.Remove(producto);
+        //     await _context.SaveChangesAsync();
 
-            var ProductoDto = _mapper.Map<ProductoDto>(producto);
+        //     var ProductoDto = _mapper.Map<ProductoDto>(producto);
 
-            return Ok(ProductoDto);
-        }
+        //     return Ok(ProductoDto);
+        // }
     }
 }

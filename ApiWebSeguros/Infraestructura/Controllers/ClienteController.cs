@@ -1,4 +1,3 @@
-using AutoMapper;
 using ApiWebSeguros.Dominio.Entidades.DTOs; 
 using ApiWebSeguros.Dominio;
 using ApiWebSeguros.Persistencia.Interfaces;
@@ -11,20 +10,20 @@ namespace ApiWebSeguros.Infraestructura.Controllers
     public class ClienteController : ControllerBase
     {
         private readonly IClienteRepository _clienteRepository; // Crea la interfaz de repositorio para Cliente.
-        private readonly IMapper _mapper;
+        //private readonly IMapper _mapper;
 
-        public ClienteController(IClienteRepository clienteRepository, IMapper mapper)
+        public ClienteController(IClienteRepository clienteRepository)
         {
             _clienteRepository = clienteRepository;
-            _mapper = mapper;
+            //_mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var clientes = await _clienteRepository.GetAllAsync();
-            var clientesDto = _mapper.Map<List<ClienteToListDto>>(clientes);
-            return Ok(clientesDto);
+            //var clientesDto = _mapper.Map<List<ClienteToListDto>>(clientes);
+            return Ok(clientes);
         }
 
         [HttpGet("{id}")]
@@ -34,33 +33,33 @@ namespace ApiWebSeguros.Infraestructura.Controllers
             if (cliente == null)
                 return NotFound("Cliente no encontrado");
             
-            var clienteDto = _mapper.Map<ClienteToListDto>(cliente);
-            return Ok(clienteDto);
+           // var clienteDto = _mapper.Map<ClienteToListDto>(cliente);
+            return Ok(cliente);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(ClienteToCreateDto clienteToCreateDto)
+        public async Task<IActionResult> Post(Cliente clienteToCreate)
         {
-            var clienteToCreate = _mapper.Map<Cliente>(clienteToCreateDto);
+           // var clienteToCreate = _mapper.Map<Cliente>(clienteToCreateDto);
             clienteToCreate.fechaModificacion = DateTime.Now;
 
-            var clienteCreated = await _clienteRepository.AddAsync(clienteToCreate);
-            var clienteCreatedDto = _mapper.Map<ClienteToListDto>(clienteCreated);
+            await _clienteRepository.AddAsync(clienteToCreate);
+           // var clienteCreatedDto = _mapper.Map<ClienteToListDto>(clienteCreated);
 
-            return Ok(clienteCreatedDto);
+            return Ok(clienteToCreate);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string id, ClienteToUpdateDto clienteToUpdateDto)
+        public async Task<IActionResult> Put(string id, Cliente clienteToUpdate)
         {
-            if (id != clienteToUpdateDto.cliente)
+            if (id != clienteToUpdate.cliente)
                 return BadRequest("Error en los datos de entrada");
 
-            var clienteToUpdate = await _clienteRepository.GetByIdAsync(id);
-            if (clienteToUpdate == null)
+            var cliente = await _clienteRepository.GetByIdAsync(id);
+            if (cliente == null)
                 return NotFound("Cliente no encontrado");
 
-            _mapper.Map(clienteToUpdateDto, clienteToUpdate);
+            //_mapper.Map(clienteToUpdateDto, clienteToUpdate);
             clienteToUpdate.fechaModificacion = DateTime.Now;
 
             var updated = await _clienteRepository.UpdateAsync(id, clienteToUpdate);
@@ -68,10 +67,10 @@ namespace ApiWebSeguros.Infraestructura.Controllers
             if (!updated)
                 return NoContent();
 
-            var cliente = await _clienteRepository.GetByIdAsync(id);
-            var clienteDto = _mapper.Map<ClienteToListDto>(cliente);
+         //   var cliente = await _clienteRepository.GetByIdAsync(id);
+          //  var clienteDto = _mapper.Map<ClienteToListDto>(cliente);
 
-            return Ok(clienteDto);
+            return Ok(updated);
         }
 
         [HttpDelete("{id}")]

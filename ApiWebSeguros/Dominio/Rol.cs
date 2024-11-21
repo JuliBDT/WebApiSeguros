@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiWebSeguros.Dominio
 {
@@ -10,6 +7,7 @@ namespace ApiWebSeguros.Dominio
         public int ramo { get; set; }
         public int producto { get; set; }
         public int poliza { get; set; }
+        [Key]
         public int rol { get; set; }
         public string cliente { get; set; } ="";
         public DateTime fechaEfecto { get; set; }

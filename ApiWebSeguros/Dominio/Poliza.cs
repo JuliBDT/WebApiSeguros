@@ -1,13 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiWebSeguros.Dominio
 {
     public class Poliza
     {
-                public int ramo { get; set; }
+        [Key]
+        public int ramo { get; set; }
         public int producto { get; set; }
         public int poliza { get; set; }
         public string clienteTitular { get; set; } ="";

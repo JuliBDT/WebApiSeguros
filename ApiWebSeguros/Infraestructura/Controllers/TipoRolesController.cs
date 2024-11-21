@@ -1,4 +1,3 @@
-using AutoMapper;
 using ApiWebSeguros.Dominio.Entidades.DTOs;
 using ApiWebSeguros.Dominio;
 using ApiWebSeguros.Persistencia.Interfaces;
@@ -11,20 +10,19 @@ namespace ApiWebSeguros.Infraestructura.Controllers
     public class TipoRolesController : ControllerBase
     {
         private readonly ITipoRolesRepository _tipoRolesRepository;
-        private readonly IMapper _mapper;
+   
 
-        public TipoRolesController(ITipoRolesRepository tipoRolesRepository, IMapper mapper)
+        public TipoRolesController(ITipoRolesRepository tipoRolesRepository)
         {
             _tipoRolesRepository = tipoRolesRepository;
-            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var tipoRoles = await _tipoRolesRepository.GetAllAsync();
-            var tipoRolesDto = _mapper.Map<List<TipoRolesDto>>(tipoRoles);
-            return Ok(tipoRolesDto);
+            //var tipoRolesDto = _mapper.Map<List<TipoRolesDto>>(tipoRoles);
+            return Ok(tipoRoles);
         }
 
         [HttpGet("{rol}")]
@@ -33,39 +31,39 @@ namespace ApiWebSeguros.Infraestructura.Controllers
             var tipoRol = await _tipoRolesRepository.GetByIdAsync(rol);
             if (tipoRol == null) return NotFound("Rol no encontrado.");
             
-            var tipoRolDto = _mapper.Map<TipoRolesDto>(tipoRol);
-            return Ok(tipoRolDto);
+            //var tipoRolDto = _mapper.Map<TipoRolesDto>(tipoRol);
+            return Ok(tipoRol);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(TipoRolesToCreateDto tipoRolesToCreateDto)
+        public async Task<IActionResult> Post(TipoRoles tipoRolesToCreate)
         {
-            var tipoRolesToCreate = _mapper.Map<TipoRoles>(tipoRolesToCreateDto);
+           // var tipoRolesToCreate = _mapper.Map<TipoRoles>(tipoRolesToCreateDto);
             tipoRolesToCreate.fechaComputo = DateTime.Now;
 
             var tipoRolesCreated = await _tipoRolesRepository.AddAsync(tipoRolesToCreate);
-            var tipoRolesCreatedDto = _mapper.Map<TipoRolesDto>(tipoRolesCreated);
+            //var tipoRolesCreatedDto = _mapper.Map<TipoRolesDto>(tipoRolesCreated);
 
-            return Ok(tipoRolesCreatedDto);
+            return Ok(tipoRolesCreated);
         }
 
         [HttpPut("{rolId}")]
-        public async Task<IActionResult> Put(int rolId, TipoRolesToUpdateDto tipoRolesToUpdateDto)
+        public async Task<IActionResult> Put(int rolId, TipoRoles tipoRolesToUpdate)
         {
-            if (rolId != tipoRolesToUpdateDto.rol)
+            if (rolId != tipoRolesToUpdate.rol)
                 return BadRequest("Error en los datos de entrada.");
 
-            var tipoRolesToUpdate = await _tipoRolesRepository.GetByIdAsync(rolId);
-            if (tipoRolesToUpdate == null) return NotFound("Rol no encontrado.");
+            var tipoRolesUpdate = await _tipoRolesRepository.GetByIdAsync(rolId);
+            if (tipoRolesUpdate == null) return NotFound("Rol no encontrado.");
 
-            _mapper.Map(tipoRolesToUpdateDto, tipoRolesToUpdate);
+           // _mapper.Map(tipoRolesToUpdateDto, tipoRolesToUpdate);
             var updated = await _tipoRolesRepository.UpdateAsync(rolId, tipoRolesToUpdate);
 
             if (!updated) return NoContent();
 
             var tipoRolesUpdated = await _tipoRolesRepository.GetByIdAsync(rolId);
-            var tipoRolesDto = _mapper.Map<TipoRolesDto>(tipoRolesUpdated);
-            return Ok(tipoRolesDto);
+           // var tipoRolesDto = _mapper.Map<TipoRolesDto>(tipoRolesUpdated);
+            return Ok(tipoRolesUpdated);
         }
 
         [HttpDelete("{rolId}")]

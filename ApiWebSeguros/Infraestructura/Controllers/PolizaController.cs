@@ -1,4 +1,3 @@
-using AutoMapper;
 using ApiWebSeguros.Dominio.Entidades.DTOs;
 using ApiWebSeguros.Dominio;
 using ApiWebSeguros.Persistencia.Interfaces;
@@ -11,20 +10,19 @@ namespace ApiWebSeguros.Infraestructura.Controllers
     public class PolizaController : ControllerBase
     {
         private readonly IPolizaRepository _polizaRepository; // Crea la interfaz del repositorio para Poliza.
-        private readonly IMapper _mapper;
 
-        public PolizaController(IPolizaRepository polizaRepository, IMapper mapper)
+        public PolizaController(IPolizaRepository polizaRepository )
         {
             _polizaRepository = polizaRepository;
-            _mapper = mapper;
+          
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var polizas = await _polizaRepository.GetAllAsync();
-            var polizasDto = _mapper.Map<List<PolizaToListDto>>(polizas);
-            return Ok(polizasDto);
+            //var polizasDto = _mapper.Map<List<PolizaToListDto>>(polizas);
+            return Ok(polizas);
         }
 
         [HttpGet("{ramo}/{producto}/{poliza}")]
@@ -34,40 +32,40 @@ namespace ApiWebSeguros.Infraestructura.Controllers
             if (polizaEntity == null)
                 return NotFound("Póliza no encontrada");
             
-            var polizaDto = _mapper.Map<PolizaToListDto>(polizaEntity);
-            return Ok(polizaDto);
+          //  var polizaDto = _mapper.Map<PolizaToListDto>(polizaEntity);
+            return Ok(polizaEntity);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(PolizaToCreateDto polizaToCreateDto)
+        public async Task<IActionResult> Post(Poliza polizaToCreate)
         {
-            var polizaToCreate = _mapper.Map<Poliza>(polizaToCreateDto);
+            //var polizaToCreate = _mapper.Map<Poliza>(polizaToCreateDto);
             var polizaCreated = await _polizaRepository.AddAsync(polizaToCreate);
 
-            var polizaCreatedDto = _mapper.Map<PolizaToListDto>(polizaCreated);
-            return Ok(polizaCreatedDto);
+           // var polizaCreatedDto = _mapper.Map<PolizaToListDto>(polizaCreated);
+            return Ok(polizaToCreate);
         }
 
         [HttpPut("{ramo}/{producto}/{poliza}")]
-        public async Task<IActionResult> Put(int ramo, int producto, int poliza, PolizaToUpdateDto polizaToUpdateDto)
+        public async Task<IActionResult> Put(int ramo, int producto, int poliza, Poliza polizaToUpdate)
         {
-            if (ramo != polizaToUpdateDto.ramo || producto != polizaToUpdateDto.producto || poliza != polizaToUpdateDto.poliza)
+            if (ramo != polizaToUpdate.ramo || producto != polizaToUpdate.producto || poliza != polizaToUpdate.poliza)
                 return BadRequest("Error en los datos de entrada");
 
-            var polizaToUpdate = await _polizaRepository.GetByIdAsync(ramo, producto, poliza);
-            if (polizaToUpdate == null)
+            var polizaModificar = await _polizaRepository.GetByIdAsync(ramo, producto, poliza);
+            if (polizaModificar == null)
                 return NotFound("Póliza no encontrada");
 
-            _mapper.Map(polizaToUpdateDto, polizaToUpdate);
+            //_mapper.Map(polizaToUpdateDto, polizaToUpdate);
             var updated = await _polizaRepository.UpdateAsync(polizaToUpdate);
 
             if (!updated)
                 return NoContent();
 
             var polizaEntity = await _polizaRepository.GetByIdAsync(ramo, producto, poliza);
-            var polizaDto = _mapper.Map<PolizaToListDto>(polizaEntity);
+           // var polizaDto = _mapper.Map<PolizaToListDto>(polizaEntity);
 
-            return Ok(polizaDto);
+            return Ok(updated);
         }
 
         [HttpDelete("{ramo}/{producto}/{poliza}")]

@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiWebSeguros.Dominio
 {
     public class WayPay
     {
+        [Key]
         public int waypay { get; set; }
         public DateTime fechaComputo { get; set; }
         public string descripcion { get; set; } ="";
