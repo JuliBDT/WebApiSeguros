@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ApiWebSeguros")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3298f36a4026d5764ab67fa308f2cc5e550b4478")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4ca569ccf8088f2b10d23bb5bcf4f0fd6a2825a7")]
 [assembly: System.Reflection.AssemblyProductAttribute("ApiWebSeguros")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ApiWebSeguros")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

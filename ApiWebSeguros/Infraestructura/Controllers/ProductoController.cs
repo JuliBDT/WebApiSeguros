@@ -11,13 +11,13 @@ namespace ApiWebSeguros.Infraestructura
     public class ProductoController : ControllerBase
     {
         private readonly DataContext _context;
-     
-        public ProductoController(DataContext context )
+
+        public ProductoController(DataContext context)
         {
             _context = context;
-       
+
         }
 
-    
     }
+
 }

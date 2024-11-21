@@ -1,8 +1,7 @@
-using ApiWebSeguros.Dominio.Entidades.DTOs; // Asegúrate de crear los DTOs para Poliza.
-using ApiWebSeguros.Dominio;
-using ApiWebSeguros.Persistencia.Interfaces;
+
 using Microsoft.AspNetCore.Mvc;
 using ApiWebSeguros.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiWebSeguros.Infraestructura.Controllers
 {
@@ -16,7 +15,6 @@ namespace ApiWebSeguros.Infraestructura.Controllers
         {
             _context = ramoRepository;
         }
-
 
     }
 }

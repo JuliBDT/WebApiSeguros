@@ -1,8 +1,8 @@
 using ApiWebSeguros.Dominio.Entidades.DTOs; 
 using ApiWebSeguros.Dominio;
-using ApiWebSeguros.Persistencia.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using ApiWebSeguros.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiWebSeguros.Infraestructura.Controllers
 {
@@ -18,6 +18,5 @@ namespace ApiWebSeguros.Infraestructura.Controllers
             
         }
 
-    
     }
 }
