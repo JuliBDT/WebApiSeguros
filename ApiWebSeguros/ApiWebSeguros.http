@@ -1,0 +1,6 @@
+@ApiWebSeguros_HostAddress = http://localhost:5119
+
+GET {{ApiWebSeguros_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
